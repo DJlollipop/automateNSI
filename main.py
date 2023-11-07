@@ -13,16 +13,18 @@ def population(s: str) -> list[int]:
         except:
             return None
 
-    fillL, fillR = (N-len(s))/2, (N-len(s))/2 
+    fillL, fillR = ((N+2)-(len(s)/2))/2, ((N+2)-(len(s)/2))/2 
 
     match len(s)%2:
         case 0: # pair
-            fillR -= len(s)/2
-            fillL -= len(s)/2
+            l = [0 for _ in range(fillL)] + l
+            l += [0 for _ in range(fillR)]
 
         case _: # impair
-            fillR -= len(s)/2
-            fillL -= len(s)/2
+            l = [0 for _ in range(fillL)] + l
+            l += [0 for _ in range(fillR)]
+
+assert population("1") == [0 for _ in range(15)] + [1] + [0 for _ in range(16)]
 
 
 
