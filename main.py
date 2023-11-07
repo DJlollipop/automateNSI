@@ -29,19 +29,18 @@ def population(s: str) -> list[int]:
 
 
 
-def rules(r: int) ->list[int]:
+def rules(r: int) -> list[int]:
     try:
-        binr = str(bin(r))
+        binr: str = str(bin(r))
+        binr = binr.replace("0b","")
     except:
         return None
-    
-    l: list[int] = [i for i in binr]
-    
+
+    l: list[int] = [int(i) for i in binr]
+    print(l)
+
     while len(l) != 8:
-        l.insert(0,0)
-    
+        l.insert(0, 0)
 
     print(l)
-    return l
-
-assert rules(11) ==[0,0,0,0,1,0,1,1] 
+    return l 
