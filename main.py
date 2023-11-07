@@ -44,3 +44,9 @@ def rules(r: int) -> list[int]:
 
     print(l)
     return l 
+
+
+def evolve(pop,rules):
+    l : list[int] = [0,]
+    for i in range(len(pop-2)):
+        A : bool =  
