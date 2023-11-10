@@ -47,6 +47,30 @@ def rules(r: int) -> list[int]:
 
 
 def evolve(pop,rules):
-    l : list[int] = [0,]
-    for i in range(len(pop-2)):
-        A : bool =  
+    l = []
+    for i in range(1,len(pop)-1):
+        A : bool = pop[i-1] == 1
+        B : bool = pop[i] == 1
+        C : bool = pop[i+1] == 1
+        if not A and not B and not C:
+            l.append(rules[7]) 
+        if not A and not B and C:
+            l.append(rules[6]) 
+        if not A and B and not C:
+            l.append(rules[5]) 
+        if not A and B and C:
+            l.append(rules[4]) 
+        if A and not B and not C:
+            l.append(rules[3]) 
+        if A and not B and C:
+            l.append(rules[2]) 
+        if A and B and not C:
+            l.append(rules[1]) 
+        if A and B and C:
+            l.append(rules[0])
+    l.insert(0,0)
+    l.append(0)
+    return l
+
+
+        
