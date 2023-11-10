@@ -58,20 +58,31 @@ def rules(r: int) -> list[int]:
     return l 
 
 
-def evolve(pop,rules): # todo: add types
-    l : list[int] = [0,]
-#    for i in range(len(pop-2)):
-#        A : bool =  
+def evolve(pop,rules):
+    l = []
+    for i in range(1,len(pop)-1):
+        A : bool = pop[i-1] == 1
+        B : bool = pop[i] == 1
+        C : bool = pop[i+1] == 1
+        if not A and not B and not C:
+            l.append(rules[7]) 
+        if not A and not B and C:
+            l.append(rules[6]) 
+        if not A and B and not C:
+            l.append(rules[5]) 
+        if not A and B and C:
+            l.append(rules[4]) 
+        if A and not B and not C:
+            l.append(rules[3]) 
+        if A and not B and C:
+            l.append(rules[2]) 
+        if A and B and not C:
+            l.append(rules[1]) 
+        if A and B and C:
+            l.append(rules[0])
+    l.insert(0,0)
+    l.append(0)
+    return l
 
-def printevolve(genesis: list[int], rule: int, nbgen: int) -> None:
-    fn = lambda c: [print(WHITE) if n==1 else print(BLACK) for n in c] # print white for 1 aand black for 0 in c
 
-    old = genesis
-
-    fn(old)
-    
-    for _ in range(nbgen):
-        chain = evolve(old, rules(rule))
         
-        fn(chain)
-        old = chain
