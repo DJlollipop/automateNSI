@@ -86,21 +86,23 @@ def evolve(pop,rules):
 def printevolve(genesis: list[int], rule: int, nbgen: int) -> None:
     old = genesis
 
-    def lakaka():
+    def printv2():
         s=""
-        for i in old:
-            if i == 0:
+        for i, x in enumerate(old):
+            if i == 0 or i == len(old)-1:
+                continue
+            if x == 0:
                 s+=BLACK
             else:
                 s+=WHITE
         print(s)
 
-    lakaka()
+    printv2()
     
     for _ in range(nbgen):
         chain = evolve(old, rules(rule))
 
         old = chain
-        lakaka()
+        printv2()
 
-printevolve(population("1"), 62, 10)
+printevolve(population("1"), 255, 10)
