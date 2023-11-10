@@ -49,12 +49,10 @@ def rules(r: int) -> list[int]:
         return None
 
     l: list[int] = [int(i) for i in binr]
-    print(l)
 
     while len(l) != 8:
         l.insert(0, 0)
 
-    print(l)
     return l 
 
 
@@ -86,14 +84,23 @@ def evolve(pop,rules):
 
 
 def printevolve(genesis: list[int], rule: int, nbgen: int) -> None:
-    fn = lambda c: [print(WHITE) if n==1 else print(BLACK) for n in c] # print white for 1 aand black for 0 in c
-
     old = genesis
 
-    fn(old)
+    def lakaka():
+        s=""
+        for i in old:
+            if i == 0:
+                s+=BLACK
+            else:
+                s+=WHITE
+        print(s)
+
+    lakaka()
     
     for _ in range(nbgen):
         chain = evolve(old, rules(rule))
-        
-        fn(chain)
+
         old = chain
+        lakaka()
+
+printevolve(population("1"), 62, 10)
