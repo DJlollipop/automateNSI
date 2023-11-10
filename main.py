@@ -1,33 +1,45 @@
 WHITE, BLACK = '\u25a1', '\u25a0'
 N = 30
 
+final: list[list[int]] = [] # final 2d vector
+
 def population(s: str) -> list[int]:
     if len(s) == 0 or not '1' in s:
         return None
+    
+    if len(s)>30:
+        return [0] + s[:30] + [0]
     
     l: list[int] = []
 
     for e in s:
         try:
             l.append(int(e))
-        except:
+        except Exception as e:
+            print(e)
             return None
 
-    fillL, fillR = (N-len(s))/2, (N-len(s))/2 
+    fill: int = int(
+        (
+            N+2 - len(s)
+        )/2 
+    )
 
-    match len(s)%2:
-        case 0: # pair
-            fillR -= len(s)/2
-            fillL -= len(s)/2
+    if len(s)%2 == 0: # pair
+            l = [0 for _ in range(fill)] + l
+            l += [0 for _ in range(fill)]
 
-        case _: # impair
-            fillR -= len(s)/2
-            fillL -= len(s)/2
+    else: # impair
+            l = [0 for _ in range(fill-1)] + l
+            l += [0 for _ in range(fill)]
 
+    return [0] + l[:30] + [0]
 
-
-
-
+assert population("1") == [0 for _ in range(15)] + [1] + [0 for _ in range(16)]
+assert population("101") == [0 for _ in range(14)] + [1, 0, 1] + [0 for _ in range(15)]
+assert len(population("1")) == 32
+assert len(population("1001001")) == 32
+assert population("0") == None
 
 def rules(r: int) -> list[int]:
     try:
