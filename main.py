@@ -85,4 +85,15 @@ def evolve(pop,rules):
     return l
 
 
+def printevolve(genesis: list[int], rule: int, nbgen: int) -> None:
+    fn = lambda c: [print(WHITE) if n==1 else print(BLACK) for n in c] # print white for 1 aand black for 0 in c
+
+    old = genesis
+
+    fn(old)
+    
+    for _ in range(nbgen):
+        chain = evolve(old, rules(rule))
         
+        fn(chain)
+        old = chain
